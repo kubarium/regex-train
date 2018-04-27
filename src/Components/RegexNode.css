@@ -1,0 +1,75 @@
+.node {
+    border-radius: 3px;
+    background-color: #E2E4E6;
+    border: 1px solid rgba(173, 65, 61, .4);
+    width: 460px;
+    text-align: center;
+    padding: 4px;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-rows: auto;
+    position: relative;
+    margin: 10px 0;
+    z-index: 0;
+}
+
+label {
+    margin: 0 5px;
+    /* background:rgba(240,109,6,.3); */
+    font-size: 1.4em;
+    border-radius: 3px;
+}
+
+.pattern {
+    font-size: 3.6em;
+    display: grid;
+    color: #444444;
+    grid-template-columns: 2% 92% 2%;
+    grid-gap: 2%;
+}
+
+.pattern input {
+    padding: 4px;
+    font-size: 2rem;
+    line-height: 2em;
+    border: 0;
+    outline: 0;
+    height: 32px;
+}
+
+.controls {
+    margin: 0 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.connectors {
+    position: absolute;
+    display: none;
+    justify-content: space-between;
+    width: calc(100% + 20px);
+    left: -10px;
+    top: calc(50% - 10px);
+    height: 20px;
+    z-index: -10;
+}
+
+.connector {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #E2E4E6;
+    border: 2px solid #56AD3D;
+    border-top: 0;
+    line-height: 20px;
+    border-bottom: 0;
+    display: inline-block;
+}
+
+.connector span.input {
+    border-right: 0;
+}
+
+.connector span.output {
+    border-left: 0;
+}
