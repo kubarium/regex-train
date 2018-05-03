@@ -14,9 +14,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    /*     createNode: () => {
-      dispatch(Actions.createNode());
-    } */
+    updateInput: event => {
+      dispatch(Actions.updateInput(event.target.value));
+    }
   };
 };
 /* 
@@ -32,12 +32,12 @@ class App extends Component {
       <main>
         <section className="input">
           <h1>Input your text below</h1>
-          <textarea value={this.props.input} />
+          <textarea value={this.props.input} onChange={this.props.updateInput} />
         </section>
         <section className="regex-nodes">
           <h1>Build your RegEx Train</h1>
-          {this.props.regexNodes.map(regexNode => (
-            <RegexNode key={`regexNode-${regexNode.index}`} regexNode={regexNode} />
+          {this.props.regexNodes.map((regexNode, index) => (
+            <RegexNode key={`regexNode-${index}`} index={index} active={regexNode.active} regexNode={regexNode} />
           ))}
         </section>
         <section className="output">

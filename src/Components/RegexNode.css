@@ -73,3 +73,7 @@ label {
 .connector span.output {
     border-left: 0;
 }
+
+:disabled{
+    opacity: .3;
+}
