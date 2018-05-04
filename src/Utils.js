@@ -5,18 +5,21 @@ export const patternStringify = pattern => {
 export const prepareOutput = (input, regexNodes) => {
   let output = input;
 
-  regexNodes.filter(node => node.active).forEach(
-    node =>
-      (output = output.replace(
-        RegExp(
-          decodeURI(node.pattern),
-          Object.keys(node.flags)
-            .filter(flag => node.flags[flag])
-            .join("")
-        ),
-        node.replace
-      ))
-  );
+  let nodes = regexNodes.filter(node => node.active);
+
+  nodes.forEach(node => {
+    try {
+      output = output.replace(RegExp(node.pattern, flattenFlags(node.flags)), node.replace);
+    } catch (error) {
+      //simply ignore because we don't want to catch Regex related Syntax errors
+      console.log(error);
+    }
+  });
 
   return output;
 };
+
+const flattenFlags = flags =>
+  Object.keys(flags)
+    .filter(flag => flags[flag])
+    .join("");

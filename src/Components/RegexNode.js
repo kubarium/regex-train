@@ -7,8 +7,7 @@ import ReactNbsp from "react-nbsp";
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    regexNode: ownProps.regexNode,
-    index: ownProps.index
+    ...ownProps
   };
 };
 
@@ -19,6 +18,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     createNode: () => {
       dispatch(Actions.createNode());
+    },
+    moveNode: event => {
+      dispatch(Actions.moveNode(event.target.value, ownProps.index));
     },
     updatePattern: event => {
       dispatch(Actions.updatePattern(event.target.value, ownProps.index));
@@ -49,10 +51,11 @@ class RegexNode extends Component {
     };
   }
   collectRegex = () => {
-    console.log(this.props.flags);
     this.props.travel();
   };
   render() {
+    console.log(this.props.regexNode.flags);
+
     return (
       <div className="node">
         <div className="flags">
@@ -60,7 +63,7 @@ class RegexNode extends Component {
             <input
               type="checkbox"
               defaultValue="g"
-              defaultChecked={this.props.regexNode.flags.g}
+              checked={this.props.regexNode.flags.g}
               onChange={this.props.toggleFlag}
             />
             <ReactNbsp />
@@ -70,7 +73,7 @@ class RegexNode extends Component {
             <input
               type="checkbox"
               defaultValue="i"
-              defaultChecked={this.props.regexNode.flags.i}
+              checked={this.props.regexNode.flags.i}
               onChange={this.props.toggleFlag}
             />
             <ReactNbsp />
@@ -80,7 +83,7 @@ class RegexNode extends Component {
             <input
               type="checkbox"
               defaultValue="m"
-              defaultChecked={this.props.regexNode.flags.m}
+              checked={this.props.regexNode.flags.m}
               onChange={this.props.toggleFlag}
             />
             <ReactNbsp />
@@ -90,7 +93,7 @@ class RegexNode extends Component {
             <input
               type="checkbox"
               defaultValue="u"
-              defaultChecked={this.props.regexNode.flags.u}
+              checked={this.props.regexNode.flags.u}
               onChange={this.props.toggleFlag}
             />
             <ReactNbsp />
@@ -100,7 +103,7 @@ class RegexNode extends Component {
             <input
               type="checkbox"
               defaultValue="y"
-              defaultChecked={this.props.regexNode.flags.y}
+              checked={this.props.regexNode.flags.y}
               onChange={this.props.toggleFlag}
             />
             <ReactNbsp />
@@ -112,8 +115,9 @@ class RegexNode extends Component {
           <input
             type="text"
             name="pattern"
+            placeholder="put your pattern here: \d"
             disabled={this.props.regexNode.active === false}
-            defaultValue={this.props.regexNode.pattern && patternStringify(decodeURI(this.props.regexNode.pattern))}
+            value={this.props.regexNode.pattern && patternStringify(decodeURI(this.props.regexNode.pattern))}
             onChange={this.props.updatePattern}
           />
           /
@@ -122,12 +126,24 @@ class RegexNode extends Component {
           <button className="clone" onClick={this.props.createNode}>
             One More
           </button>
-          <button className="move-up">Move Up</button>
-          <button className="move-down">Move Down</button>
+          <button
+            className="move-up"
+            value={Actions.MOVE_NODE_UP}
+            onClick={this.props.moveNode}
+            disabled={this.props.first}>
+            Move Up
+          </button>
+          <button
+            className="move-down"
+            value={Actions.MOVE_NODE_DOWN}
+            onClick={this.props.moveNode}
+            disabled={this.props.last}>
+            Move Down
+          </button>
           <button className="disable" onClick={this.props.toggleNode} value={this.props.regexNode.active}>
             {this.props.regexNode.active ? "Disable" : "Enable"}
           </button>
-          <button className="delete" onClick={this.props.deleteNode}>
+          <button className="delete" onClick={this.props.deleteNode} disabled={this.props.first}>
             Delete
           </button>
         </div>

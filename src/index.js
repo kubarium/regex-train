@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import reducer from "./reducer";
 
 let store = createStore(reducer);
-
+window.store = store;
 ReactDOM.render(
   <Provider store={store}>
     <App />
