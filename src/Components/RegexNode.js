@@ -41,7 +41,7 @@ class RegexNode extends Component {
   render() {
     return (
       <div className="node">
-        <fieldset>
+        <fieldset className="patternFieldset">
           <legend>Pattern</legend>
           <div className="pattern">
             /
@@ -83,7 +83,7 @@ class RegexNode extends Component {
             </label>
           </div>
         </fieldset>
-        <fieldset>
+        <fieldset className="replaceFieldset">
           <legend>Replace</legend>
           <input
             type="text"
@@ -92,7 +92,7 @@ class RegexNode extends Component {
             onChange={this.props.updateReplace}
           />
         </fieldset>
-        <fieldset>
+        <fieldset className="controlsFieldset">
           <legend>Controls</legend>
           <div className="controls">
             <button className="clone" onClick={this.props.createNode}>
