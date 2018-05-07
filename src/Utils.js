@@ -12,7 +12,7 @@ export const prepareOutput = (input, regexNodes) => {
       output = output.replace(RegExp(node.pattern, flattenFlags(node.flags)), node.replace);
     } catch (error) {
       //simply ignore because we don't want to catch Regex related Syntax errors
-      console.log(error);
+      //console.log(error);
     }
   });
 

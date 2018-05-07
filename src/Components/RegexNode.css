@@ -1,34 +1,56 @@
 .node {
     border-radius: 3px;
     background-color: #E2E4E6;
-    border: 1px solid rgba(173, 65, 61, .4);
-    width: 460px;
+    /* border: 1px solid rgba(173, 65, 61, .4); */
     text-align: center;
-    padding: 4px;
+    padding: 8px;
     display: grid;
-    grid-gap: 10px;
-    grid-template-rows: auto;
+    gap: 5px;
     position: relative;
     margin: 10px 0;
     z-index: 0;
+    color: white;
 }
-
+legend{
+    font-size: 1.4em;    
+    border-radius: 3px;    
+    background: #444444;
+    padding:2px 5px;
+    color:white;
+}
+fieldset{
+    padding: 1% 2%;
+    border-color:#d0d0d0;
+    border-style: solid;
+    border-radius: 3px;
+    border-width: 1px;
+    background: #444444;
+}
+fieldset:first-of-type{
+    grid-area: 1 / 1 / 2 / 5;
+}
+fieldset:nth-child(2){
+    grid-area: 1 / 5 / 2 / 6;
+}
+fieldset:last-of-type{
+    grid-area: 3 / 1 / 3 / 6;
+}
 label {
     margin: 0 5px;
-    /* background:rgba(240,109,6,.3); */
     font-size: 1.4em;
-    border-radius: 3px;
 }
 
 .pattern {
     font-size: 3.6em;
     display: grid;
-    color: #444444;
     grid-template-columns: 2% 92% 2%;
     grid-gap: 2%;
+    margin-bottom: 10px;
 }
 
-.pattern input {
+.pattern input, .replace{
+    color: #444444;
+    border-radius: 3px;
     padding: 4px;
     font-size: 2rem;
     line-height: 2em;
@@ -36,42 +58,32 @@ label {
     outline: 0;
     height: 32px;
 }
+.replace {
+    width: 95%;
+}
 
 .controls {
-    margin: 0 20px;
     display: flex;
     justify-content: space-between;
 }
 
-.connectors {
-    position: absolute;
-    display: none;
-    justify-content: space-between;
-    width: calc(100% + 20px);
-    left: -10px;
-    top: calc(50% - 10px);
-    height: 20px;
-    z-index: -10;
+Button{
+    border-radius: 3px;
+    font-size: 1.4em;
+    padding: 4px 0px;
+    color:white;
+    background: #007FFF;
+    outline: 0;
+    min-width: 110px;
 }
-
-.connector {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #E2E4E6;
-    border: 2px solid #56AD3D;
-    border-top: 0;
-    line-height: 20px;
-    border-bottom: 0;
-    display: inline-block;
+.clone{
+    background: #59AC44;
 }
-
-.connector span.input {
-    border-right: 0;
+.disable{
+    background: #444444;    
 }
-
-.connector span.output {
-    border-left: 0;
+.delete{
+    background: rgba(173, 65, 61);
 }
 
 :disabled{

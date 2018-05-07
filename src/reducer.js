@@ -5,21 +5,18 @@ const reducerInitialState = {
   input: "The1 quick2 brown3 fox4 jumps5 over6 the7 lazy8 dog9",
   regexNodes: [
     {
-      //index: 0,
       pattern: /\d/,
       flags: { g: true, i: false, m: false, u: false, y: false },
       replace: "",
       active: true
     },
     {
-      //index: 1,
       pattern: /lazy/,
       flags: { g: false, i: false, m: false, u: false, y: false },
       replace: "quick",
       active: true
     },
     {
-      //index: 2,
       pattern: /quick/,
       flags: { g: false, i: false, m: false, u: false, y: false },
       replace: "lazy",
@@ -38,13 +35,27 @@ export default (state = reducerInitialState, action) => {
       output = prepareOutput(action.input, state.regexNodes);
 
       return Object.assign({}, state, { input: action.input, output });
-    case Actions.UPDATE_PATTERN:
+    case Actions.UPDATE_REPLACE:
       regexNodes = state.regexNodes.slice();
-      regexNodes[action.index].pattern = action.pattern;
+      regexNodes[action.index].replace = action.replace;
 
-      output = prepareOutput(state.input, regexNodes);
+      output = prepareOutput(state.input, state.regexNodes);
 
       return Object.assign({}, state, { regexNodes, output });
+    case Actions.UPDATE_PATTERN:
+      regexNodes = state.regexNodes.slice();
+
+      try {
+        //this part might be invoked after a previous catch call since the user is probably typing the correct rule
+        regexNodes[action.index].pattern = RegExp(action.pattern);
+      } catch (error) {
+        //the RegEx we are storing in each key typing might give SyntaxError, so store the string representation
+        regexNodes[action.index].pattern = action.pattern;
+      } finally {
+        output = prepareOutput(state.input, regexNodes);
+
+        return Object.assign({}, state, { regexNodes, output });
+      }
     case Actions.TOGGLE_FLAG:
       regexNodes = state.regexNodes.slice();
       regexNodes[action.index].flags[action.flag] = action.toggle;
@@ -82,13 +93,15 @@ export default (state = reducerInitialState, action) => {
       return Object.assign({}, state, { regexNodes, output });
     case Actions.CREATE_NODE:
       regexNodes = state.regexNodes.concat({
-        pattern: null,
+        pattern: "",
         flags: { g: false, i: false, m: false, u: false, y: false },
         replace: "",
         active: true
       });
       return Object.assign({}, state, { regexNodes });
     default:
-      return state;
+      output = prepareOutput(state.input, state.regexNodes);
+
+      return Object.assign({}, state, { output });
   }
 };

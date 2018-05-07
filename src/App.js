@@ -19,13 +19,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
   };
 };
-/* 
-const mergeProps = (stateProps, dispatchProps, ownProps) => {
-  return {
-    mergeProp: mergePropVal
-  };
-};
- */
+
 class App extends Component {
   render() {
     return (
@@ -37,12 +31,19 @@ class App extends Component {
         <section className="regex-nodes">
           <h1>Build your RegEx Train</h1>
           {this.props.regexNodes.map((regexNode, index, nodes) => (
-            <RegexNode key={`regexNode-${index}`} index={index} active={regexNode.active} last={index===nodes.length-1} first={index===0} regexNode={regexNode} />
+            <RegexNode
+              key={`regexNode-${index}`}
+              index={index}
+              active={regexNode.active}
+              last={index === nodes.length - 1}
+              first={index === 0}
+              regexNode={regexNode}
+            />
           ))}
         </section>
         <section className="output">
           <h1>Your processed output</h1>
-          <textarea value={this.props.output} />
+          <textarea value={this.props.output} readOnly />
         </section>
       </main>
     );

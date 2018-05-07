@@ -1,5 +1,6 @@
 export const TOGGLE_FLAG = "TOGGLE_FLAG";
 export const UPDATE_PATTERN = "UPDATE_PATTERN";
+export const UPDATE_REPLACE = "UPDATE_REPLACE";
 export const UPDATE_INPUT = "UPDATE_INPUT";
 export const MOVE_NODE = "MOVE_NODE";
 export const MOVE_NODE_DOWN = "MOVE_NODE_DOWN";
@@ -26,6 +27,10 @@ export const updateInput = input => {
 
 export const updatePattern = (pattern, index) => {
   return { type: UPDATE_PATTERN, pattern, index };
+};
+
+export const updateReplace = (replace, index) => {
+  return { type: UPDATE_REPLACE, replace, index };
 };
 
 export const toggleNode = (toggle, index) => {
