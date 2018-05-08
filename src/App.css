@@ -29,4 +29,5 @@ section textarea{
   resize: none;
   border-color: #cecece;
   border-radius: 3px;
+  font-family: sans-serif;
 }

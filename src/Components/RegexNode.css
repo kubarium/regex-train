@@ -1,6 +1,6 @@
 .node {
     border-radius: 3px;
-    background-color: #E2E4E6;
+    background-color: #666;
     /* border: 1px solid rgba(173, 65, 61, .4); */
     text-align: center;
     padding: 8px;
@@ -10,15 +10,14 @@
     position: relative;
     margin: 10px 0;
     z-index: 0;
-    color: white;
     width: 98%;
 }
 legend{
     font-size: 1.4em;    
     border-radius: 3px;    
-    background: #666;
+    background: #E2E4E6;
     padding:2px 5px;
-    color:white;
+    text-align: left;
 }
 fieldset{
     padding: 1% 2%;
@@ -26,8 +25,9 @@ fieldset{
     border-style: solid;
     border-radius: 3px;
     border-width: 1px;
-    background: #666;
+    background: #E2E4E6;
     display: grid;
+    max-height: fit-content;
 }
 
 .controlsFieldset{
@@ -51,7 +51,6 @@ label {
     border-radius: 3px;
     padding: 4px;
     font-size: 2rem;
-    line-height: 2em;
     border: 0;
     outline: 0;
     height: 32px;
