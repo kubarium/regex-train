@@ -23,7 +23,8 @@ const reducerInitialState = {
       active: true
     }
   ],
-  output: ""
+  output: "",
+  faq: false
 };
 
 export default (state = reducerInitialState, action) => {
@@ -99,6 +100,8 @@ export default (state = reducerInitialState, action) => {
         active: true
       });
       return Object.assign({}, state, { regexNodes });
+    case Actions.TOGGLE_FAQ:
+      return Object.assign({}, state, { faq: !state.faq });
     default:
       output = prepareOutput(state.input, state.regexNodes);
 

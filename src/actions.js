@@ -8,6 +8,7 @@ export const MOVE_NODE_UP = "MOVE_NODE_UP";
 export const DELETE_NODE = "DELETE_NODE";
 export const CREATE_NODE = "CREATE_NODE";
 export const TOGGLE_NODE = "TOGGLE_NODE";
+export const TOGGLE_FAQ = "TOGGLE_FAQ";
 
 export const createNode = () => {
   return { type: CREATE_NODE };
@@ -39,4 +40,7 @@ export const toggleNode = (toggle, index) => {
 
 export const toggleFlag = (flag, toggle, index) => {
   return { type: TOGGLE_FLAG, flag, toggle, index };
+};
+export const toggleFaq = () => {
+  return { type: TOGGLE_FAQ };
 };

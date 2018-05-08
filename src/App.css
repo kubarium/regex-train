@@ -10,7 +10,7 @@ main {
 }
 
 section {
-  background: rgb(0,0,55,.2);
+  background: rgb(0,0,55,.1);
   display: flex;
   padding: 0px 10px 10px;
   flex-direction: column;  
@@ -18,7 +18,7 @@ section {
   border-radius: 3px;
 }
 
-section h1{
+h1{
   font-size: 2em;
 }
 
@@ -30,4 +30,29 @@ section textarea{
   border-color: #cecece;
   border-radius: 3px;
   font-family: sans-serif;
+}
+
+p{
+  font-size: 1.4em;
+  padding: 0 1em;
+  text-align: left;
+}
+
+header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+
+.faq{
+  background: white;
+  border-radius:50%;
+  text-align: center;
+  font-weight: bold;
+  min-width: 25px;
+  min-height: 25px;
+  font-size: 1rem;
+  line-height: 25px;
 }
