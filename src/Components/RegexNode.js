@@ -88,27 +88,57 @@ class RegexNode extends Component {
           </div>
           <div className="flags">
             <label>
-              <input type="checkbox" name="g" checked={this.props.regexNode.flags.g} onChange={this.props.toggleFlag} />
+              <input
+                type="checkbox"
+                name="g"
+                disabled={this.props.regexNode.active === false}
+                checked={this.props.regexNode.flags.g}
+                onChange={this.props.toggleFlag}
+              />
               <ReactNbsp />
               (g)lobal
             </label>
             <label>
-              <input type="checkbox" name="i" checked={this.props.regexNode.flags.i} onChange={this.props.toggleFlag} />
+              <input
+                type="checkbox"
+                name="i"
+                disabled={this.props.regexNode.active === false}
+                checked={this.props.regexNode.flags.i}
+                onChange={this.props.toggleFlag}
+              />
               <ReactNbsp />
               (i)nsensitive
             </label>
             <label>
-              <input type="checkbox" name="m" checked={this.props.regexNode.flags.m} onChange={this.props.toggleFlag} />
+              <input
+                type="checkbox"
+                name="m"
+                disabled={this.props.regexNode.active === false}
+                checked={this.props.regexNode.flags.m}
+                onChange={this.props.toggleFlag}
+              />
               <ReactNbsp />
               (m)ultiline
             </label>
             <label>
-              <input type="checkbox" name="u" checked={this.props.regexNode.flags.u} onChange={this.props.toggleFlag} />
+              <input
+                type="checkbox"
+                name="u"
+                disabled={this.props.regexNode.active === false}
+                checked={this.props.regexNode.flags.u}
+                onChange={this.props.toggleFlag}
+              />
               <ReactNbsp />
               (u)nicode
             </label>
             <label>
-              <input type="checkbox" name="y" checked={this.props.regexNode.flags.y} onChange={this.props.toggleFlag} />
+              <input
+                type="checkbox"
+                name="y"
+                disabled={this.props.regexNode.active === false}
+                checked={this.props.regexNode.flags.y}
+                onChange={this.props.toggleFlag}
+              />
               <ReactNbsp />
               stick(y)
             </label>
@@ -119,6 +149,7 @@ class RegexNode extends Component {
           <input
             type="text"
             className="replace"
+            disabled={this.props.regexNode.active === false}
             value={this.props.regexNode.replace}
             onChange={this.props.updateReplace}
           />
