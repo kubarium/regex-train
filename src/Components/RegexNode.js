@@ -6,7 +6,7 @@ import { patternStringify } from "../Utils";
 import ReactNbsp from "react-nbsp";
 
 import MdCheckBoxOutlineBlank from "react-icons/lib/md/check-box-outline-blank";
-import MdCheckbox from "react-icons/lib/md/check-box";
+import MdCheckBox from "react-icons/lib/md/check-box";
 import MdAdd from "react-icons/lib/md/add";
 import MdRemove from "react-icons/lib/md/remove";
 import MdKeyboardArrowDown from "react-icons/lib/md/keyboard-arrow-down";
