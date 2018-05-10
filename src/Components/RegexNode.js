@@ -4,23 +4,14 @@ import { connect } from "react-redux";
 import * as Actions from "../actions";
 import { patternStringify } from "../Utils";
 import ReactNbsp from "react-nbsp";
-//import MdIconPack from "react-icons/lib/md/check-box";
-/*
-import MdCheckboxChecked from "react-icons/lib/md/check-box";
-import MdCheckbox from "react-icons/lib/md/check-box-outline-blank";
-import MdAddCircle from "react-icons/lib/md/add-circle";
-import MdRemoveCircle from "react-icons/lib/md/remove-circle";
+
+import MdCheckBoxOutlineBlank from "react-icons/lib/md/check-box-outline-blank";
+import MdCheckbox from "react-icons/lib/md/check-box";
+import MdAdd from "react-icons/lib/md/add";
+import MdRemove from "react-icons/lib/md/remove";
 import MdKeyboardArrowDown from "react-icons/lib/md/keyboard-arrow-down";
 import MdKeyboardArrowUp from "react-icons/lib/md/keyboard-arrow-up";
-*/
-import {
-  MdKeyboardArrowUp,
-  MdKeyboardArrowDown,
-  MdAdd,
-  MdRemove,
-  MdCheckBox,
-  MdCheckBoxOutlineBlank
-} from "react-icons/lib/md";
+
 const mapStateToProps = (state, ownProps) => {
   return {
     ...ownProps,
