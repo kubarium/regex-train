@@ -39,7 +39,7 @@ class App extends Component {
           <div style={{ display: this.props.faq === false ? "none" : "block" }}>
             <p>
               For all your regular expression needs, please peruse{" "}
-              <a href="https://regexr.com/" target="_blank">
+              <a href="https://regexr.com/" target="_blank" rel="noopener noreferrer">
                 RegExr
               </a>, an indispensable tool that I refer to almost every day multiple times.
             </p>

@@ -4,7 +4,23 @@ import { connect } from "react-redux";
 import * as Actions from "../actions";
 import { patternStringify } from "../Utils";
 import ReactNbsp from "react-nbsp";
-
+//import MdIconPack from "react-icons/lib/md/check-box";
+/*
+import MdCheckboxChecked from "react-icons/lib/md/check-box";
+import MdCheckbox from "react-icons/lib/md/check-box-outline-blank";
+import MdAddCircle from "react-icons/lib/md/add-circle";
+import MdRemoveCircle from "react-icons/lib/md/remove-circle";
+import MdKeyboardArrowDown from "react-icons/lib/md/keyboard-arrow-down";
+import MdKeyboardArrowUp from "react-icons/lib/md/keyboard-arrow-up";
+*/
+import {
+  MdKeyboardArrowUp,
+  MdKeyboardArrowDown,
+  MdAdd,
+  MdRemove,
+  MdCheckBox,
+  MdCheckBoxOutlineBlank
+} from "react-icons/lib/md";
 const mapStateToProps = (state, ownProps) => {
   return {
     ...ownProps,
@@ -21,7 +37,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(Actions.createNode());
     },
     moveNode: event => {
-      dispatch(Actions.moveNode(event.target.value, ownProps.index));
+      dispatch(Actions.moveNode(event.currentTarget.value, ownProps.index));
     },
     updatePattern: event => {
       dispatch(Actions.updatePattern(event.target.value, ownProps.index));
@@ -41,6 +57,30 @@ class RegexNode extends Component {
   render() {
     return (
       <div className="node">
+        <fieldset className="controlsFieldset">
+          <legend>Controls</legend>
+          <div className="controls">
+            <button onClick={this.props.createNode}>
+              <MdAdd className="clone" />
+            </button>
+            <button onClick={this.props.deleteNode} disabled={this.props.first}>
+              <MdRemove className="delete" />
+            </button>
+            <button value={Actions.MOVE_NODE_UP} onClick={this.props.moveNode} disabled={this.props.first}>
+              <MdKeyboardArrowUp className="move-up" />
+            </button>
+            <button value={Actions.MOVE_NODE_DOWN} onClick={this.props.moveNode} disabled={this.props.last}>
+              <MdKeyboardArrowDown className="move-down" />
+            </button>
+            <button onClick={this.props.toggleNode} value={this.props.regexNode.active}>
+              {this.props.regexNode.active ? (
+                <MdCheckBox className="disable" />
+              ) : (
+                <MdCheckBoxOutlineBlank className="disable" />
+              )}
+            </button>
+          </div>
+        </fieldset>
         <fieldset className="patternFieldset">
           <legend>Pattern</legend>
           <div className="pattern">
@@ -91,34 +131,6 @@ class RegexNode extends Component {
             value={this.props.regexNode.replace}
             onChange={this.props.updateReplace}
           />
-        </fieldset>
-        <fieldset className="controlsFieldset">
-          <legend>Controls</legend>
-          <div className="controls">
-            <button className="clone" onClick={this.props.createNode}>
-              One More
-            </button>
-            <button
-              className="move-up"
-              value={Actions.MOVE_NODE_UP}
-              onClick={this.props.moveNode}
-              disabled={this.props.first}>
-              Move Up
-            </button>
-            <button
-              className="move-down"
-              value={Actions.MOVE_NODE_DOWN}
-              onClick={this.props.moveNode}
-              disabled={this.props.last}>
-              Move Down
-            </button>
-            <button className="disable" onClick={this.props.toggleNode} value={this.props.regexNode.active}>
-              {this.props.regexNode.active ? "Disable" : "Enable"}
-            </button>
-            <button className="delete" onClick={this.props.deleteNode} disabled={this.props.first}>
-              Delete
-            </button>
-          </div>
         </fieldset>
       </div>
     );
