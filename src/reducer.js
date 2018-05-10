@@ -5,19 +5,19 @@ const reducerInitialState = {
   input: "The1 quick2 brown3 fox4 jumps5 over6 the7 lazy8 dog9",
   regexNodes: [
     {
-      pattern: /\d/,
+      pattern: encodeURI("\\d"),
       flags: { g: true, i: false, m: false, u: false, y: false },
       replace: "",
       active: true
     },
     {
-      pattern: /lazy/,
+      pattern: encodeURI("lazy"),
       flags: { g: false, i: false, m: false, u: false, y: false },
       replace: "quick",
       active: true
     },
     {
-      pattern: /quick/,
+      pattern: encodeURI("quick"),
       flags: { g: false, i: false, m: false, u: false, y: false },
       replace: "lazy",
       active: true
@@ -45,18 +45,11 @@ export default (state = reducerInitialState, action) => {
       return Object.assign({}, state, { regexNodes, output });
     case Actions.UPDATE_PATTERN:
       regexNodes = state.regexNodes.slice();
+      regexNodes[action.index].pattern = encodeURI(action.pattern);
 
-      try {
-        //this part might be invoked after a previous catch call since the user is probably typing the correct rule
-        regexNodes[action.index].pattern = RegExp(action.pattern);
-      } catch (error) {
-        //the RegEx we are storing in each key typing might give SyntaxError, so store the string representation
-        regexNodes[action.index].pattern = action.pattern;
-      } finally {
-        output = prepareOutput(state.input, regexNodes);
+      output = prepareOutput(state.input, regexNodes);
 
-        return Object.assign({}, state, { regexNodes, output });
-      }
+      return Object.assign({}, state, { regexNodes, output });
     case Actions.TOGGLE_FLAG:
       regexNodes = state.regexNodes.slice();
       regexNodes[action.index].flags[action.flag] = action.toggle;

@@ -1,5 +1,6 @@
 export const patternStringify = pattern => {
-  return pattern.toString().substring(1, pattern.toString().length - 1);
+  return pattern;
+  //return pattern.toString().substring(1, pattern.toString().length - 1);
 };
 
 export const prepareOutput = (input, regexNodes) => {
@@ -9,7 +10,7 @@ export const prepareOutput = (input, regexNodes) => {
 
   nodes.forEach(node => {
     try {
-      output = output.replace(RegExp(node.pattern, flattenFlags(node.flags)), node.replace);
+      output = output.replace(RegExp(decodeURI(node.pattern), flattenFlags(node.flags)), node.replace);
     } catch (error) {
       //simply ignore because we don't want to catch Regex related Syntax errors
       //console.log(error);
