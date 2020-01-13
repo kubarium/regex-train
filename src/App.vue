@@ -3,7 +3,7 @@
     <v-app-bar app color="primary" dark class="text-center">
       <div class="d-flex align-center">
         <h1>
-          Regex Train
+          RegEx Train
         </h1>
       </div>
 
@@ -13,20 +13,20 @@
     </v-app-bar>
 
     <v-content>
-      <HelloWorld />
+      <train />
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
+import Train from "./components/Train";
 import Instructions from "./components/Instructions";
 
 export default {
   name: "App",
 
   components: {
-    HelloWorld,
+    Train,
     Instructions
   },
 
