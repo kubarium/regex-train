@@ -1,13 +1,15 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-row>
-      <locomotive />
-    </v-row>
-    <v-row>
-      <wagons />
-    </v-row>
-    <v-row>
-      <caboose />
+      <v-col cols="2">
+        <locomotive />
+      </v-col>
+      <v-col>
+        <wagons />
+      </v-col>
+      <v-col cols="2">
+        <caboose />
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -22,3 +24,9 @@ export default {
   data: () => ({})
 };
 </script>
+
+<style>
+.col {
+  outline: 1px solid red;
+}
+</style>

@@ -84,7 +84,11 @@
 export default {
   name: "wagon",
   props: { regexNode: { type: Object }, index: Number },
-  data: () => ({ first: this.index === 0, last: this.index === this.$store.state.wagons.length - 1 }),
+  data: () => ({}),
+  created() {
+    this.first = this.index === 0;
+    this.last = this.index === this.$store.state.wagons.length - 1;
+  },
   methods: {
     patternStringify() {},
     deleteNode() {},
