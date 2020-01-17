@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
+import { prepareOutput } from "../Utils";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -26,9 +28,46 @@ export default new Vuex.Store({
         active: true
       }
     ],
-    caboose: "asdas"
+    caboose: ""
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    addWagon(state) {
+      state.wagons.push({
+        pattern: "",
+        flags: { g: false, i: false, m: false },
+        replace: "",
+        active: true
+      });
+    },
+    updateCaboose(state) {
+      console.log(prepareOutput(state.locomotive, state.wagons));
+      state.caboose = prepareOutput(state.locomotive, state.wagons);
+    }
+  },
+  actions: {
+    toggleFlag({ state, commit }, payload) {
+      state.wagons[payload.index].flags[payload.flag] = !state.wagons[payload.index].flags[payload.flag];
+      commit("updateCaboose");
+    },
+    toggleWagon({ state, commit }, index) {
+      state.wagons[index].active = !state.wagons[index].active;
+      commit("updateCaboose");
+    },
+    removeWagon({ state, commit }, index) {
+      state.wagons.splice(index, 1);
+      commit("updateCaboose");
+    },
+    moveWagon({ state, commit }, payload) {
+      if (payload.direction === "up") {
+        //we take care of index=0 case with UI so index 0 will never come here
+        state.wagons.splice(payload.index - 1, 2, state.wagons[payload.index], state.wagons[payload.index - 1]);
+      }
+      if (payload.direction === "down") {
+        //we take care of index=length-1 case with UI so RangeError is not possible
+        state.wagons.splice(payload.index, 2, state.wagons[payload.index + 1], state.wagons[payload.index]);
+      }
+      commit("updateCaboose");
+    }
+  },
   modules: {}
 });

@@ -21,12 +21,9 @@ import Caboose from "./Caboose";
 export default {
   name: "train",
   components: { Locomotive, Wagons, Caboose },
-  data: () => ({})
+  data: () => ({}),
+  created() {
+    this.$store.commit("updateCaboose");
+  }
 };
 </script>
-
-<style>
-.col {
-  outline: 1px solid red;
-}
-</style>

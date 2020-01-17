@@ -21,7 +21,6 @@ export default { name: "locomotive" };
   display: flex;
 }
 /deep/ .v-input__slot {
-  outline: 1px solid darkgreen;
   height: 100%;
 }
 /deep/ .v-input__control {
