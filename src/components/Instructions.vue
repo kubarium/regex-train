@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" width="50%">
+  <v-dialog v-model="dialog" width="40%">
     <template v-slot:activator="{ on }">
       <v-icon v-on="on">fas fa-info-circle</v-icon>
     </template>
@@ -10,31 +10,24 @@
       <v-card-text class="py-3">
         <p>
           For all your regular expression needs, please peruse
-          <a
-            href="https://regexr.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            >RegExr</a
-          >, an indispensable tool that I refer to almost every day multiple
-          times.
+          <a href="https://regexr.com/" target="_blank" rel="noopener noreferrer">RegExr</a>, an indispensable tool that
+          I refer to almost every day multiple times.
         </p>
         <p>
-          That being said, I sometimes need to chain my regular expressions so
-          in each operation of replace, the output gets pasted back into input
-          at RegExr. Of course, further down the chain, I realize I had
-          forgotten something in one of the early replace operations. This
-          creates a lot of frustration since I now have to open multiple tabs
-          for each operation I want to run so I could have access to the history
-          of the rules I applied.
+          That being said, I sometimes need to chain my regular expressions so in each operation of replace, the output
+          gets pasted back into input at RegExr. Of course, further down the chain, I realize I had forgotten something
+          in one of the early replace operations. This creates a lot of frustration since I now have to open multiple
+          tabs for each operation I want to run so I could have access to the history of the rules I applied.
         </p>
         <p>
-          Let's look at an example. I want to get rid of the numbers at the end
-          of each word and swap <strong>lazy</strong> and
-          <strong>quick</strong> in the sentence. The suggested solution when
-          you load this website is one way of doing it. You can alter the order
-          of the nodes. In some cases the order of nodes won't make any
-          difference but, sometimes, you've got to be careful since the order
-          will prematurely modify your input.
+          Let's look at an example. I want to get rid of the numbers at the end of each word and swap
+          <strong>lazy</strong> and <strong>quick</strong> in the sentence. The suggested solution when you load this
+          website is one way of doing it.
+        </p>
+        <p>
+          To achieve the result you want, you may have to alter the order of the nodes. In some cases the order of the
+          nodes won't make any difference but, sometimes, you've got to be careful since the order will prematurely
+          modify your input.
         </p>
       </v-card-text>
       <v-divider />

@@ -5,14 +5,21 @@
         <h2>
           Start here
         </h2>
-        <v-textarea filled :value="$store.state.locomotive" />
+        <v-textarea filled :value="$store.state.locomotive" @input="updateLocomotive" />
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-export default { name: "locomotive" };
+export default {
+  name: "locomotive",
+  methods: {
+    updateLocomotive(value) {
+      this.$store.dispatch("updateLocomotive", value);
+    }
+  }
+};
 </script>
 
 <style scoped>

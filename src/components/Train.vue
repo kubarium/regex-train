@@ -1,13 +1,13 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="2">
+      <v-col cols="3">
         <locomotive />
       </v-col>
       <v-col>
         <wagons />
       </v-col>
-      <v-col cols="2">
+      <v-col cols="3">
         <caboose />
       </v-col>
     </v-row>

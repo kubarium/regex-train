@@ -31,30 +31,42 @@ export default new Vuex.Store({
     caboose: ""
   },
   mutations: {
-    addWagon(state) {
-      state.wagons.push({
-        pattern: "",
-        flags: { g: false, i: false, m: false },
-        replace: "",
-        active: true
-      });
-    },
     updateCaboose(state) {
-      console.log(prepareOutput(state.locomotive, state.wagons));
       state.caboose = prepareOutput(state.locomotive, state.wagons);
     }
   },
   actions: {
     toggleFlag({ state, commit }, payload) {
-      state.wagons[payload.index].flags[payload.flag] = !state.wagons[payload.index].flags[payload.flag];
+      state.wagons[payload.index].flags[payload.flag] = payload.flag;
+      commit("updateCaboose");
+    },
+    updateLocomotive({ state, commit }, value) {
+      state.locomotive = value;
       commit("updateCaboose");
     },
     toggleWagon({ state, commit }, index) {
       state.wagons[index].active = !state.wagons[index].active;
       commit("updateCaboose");
     },
+    addWagon({ state, commit }, index) {
+      state.wagons.splice(index, 0, {
+        pattern: "",
+        flags: { g: false, i: false, m: false },
+        replace: "",
+        active: true
+      });
+      commit("updateCaboose");
+    },
     removeWagon({ state, commit }, index) {
       state.wagons.splice(index, 1);
+      commit("updateCaboose");
+    },
+    updateReplace({ state, commit }, payload) {
+      state.wagons[payload.index].replace = payload.value || "";
+      commit("updateCaboose");
+    },
+    updatePattern({ state, commit }, payload) {
+      state.wagons[payload.index].pattern = encodeURI(payload.value || "");
       commit("updateCaboose");
     },
     moveWagon({ state, commit }, payload) {

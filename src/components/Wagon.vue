@@ -6,10 +6,10 @@
         <v-divider />
         <v-container>
           <v-row class="d-flex justify-space-around mb-3">
-            <v-btn x-small fab color="green" @click="$store.commit('addWagon')">
+            <v-btn x-small fab color="green white--text" @click="$store.dispatch('addWagon', index)">
               <v-icon>fas fa-plus</v-icon>
             </v-btn>
-            <v-btn x-small fab color="red" @click="$store.dispatch('removeWagon', index)" :disabled="first">
+            <v-btn x-small fab color="red white--text" @click="$store.dispatch('removeWagon', index)" :disabled="first">
               <v-icon>fas fa-minus</v-icon>
             </v-btn>
           </v-row>
@@ -18,8 +18,8 @@
               x-small
               fab
               color="primary--text"
-              @click="$store.dispatch('moveWagon', { direction: 'up', index })"
               :disabled="first"
+              @click="$store.dispatch('moveWagon', { direction: 'up', index })"
             >
               <v-icon>fas fa-chevron-up</v-icon>
             </v-btn>
@@ -27,8 +27,8 @@
               x-small
               fab
               color="primary--text"
-              @click="$store.dispatch('moveWagon', { direction: 'down', index })"
               :disabled="last"
+              @click="$store.dispatch('moveWagon', { direction: 'down', index })"
             >
               <v-icon>fas fa-chevron-down</v-icon>
             </v-btn>
@@ -54,20 +54,21 @@
               hide-details
               placeholder="put your pattern here: \d"
               :disabled="!regexNode.active"
-              :value="regexNode.pattern !== null && decodeURI(regexNode.pattern)"
+              :value="regexNode.pattern != null && decodeURI(regexNode.pattern)"
+              @input="updatePattern"
             />
             <span class="headline">/</span>
-            <label v-for="flag in ['g', 'i', 'm']" :key="flag">
-              <v-checkbox
-                dense
-                hide-details
-                class="mx-1 my-0"
-                :disabled="!regexNode.active"
-                :value="regexNode.flags[flag]"
-                :label="`(${flag})`"
-                @change="$store.dispatch('toggleFlag', { flag, index })"
-              />
-            </label>
+            <v-checkbox
+              v-for="flag in ['g', 'i', 'm']"
+              :key="flag"
+              dense
+              hide-details
+              class="mx-1 my-0"
+              :disabled="!regexNode.active"
+              v-model="$store.state.wagons[index].flags[flag]"
+              @change="updateFlag"
+              :label="`(${flag})`"
+            />
           </v-row>
         </v-container>
         <h3>Replace</h3>
@@ -82,6 +83,7 @@
               placeholder="place the text you want to use as replacement: $1, some other text or leave it empty"
               :disabled="!regexNode.active"
               :value="regexNode.replace"
+              @input="updateReplace"
             />
           </v-row>
         </v-container>
@@ -93,15 +95,18 @@
 <script>
 export default {
   name: "wagon",
-  props: { regexNode: { type: Object }, index: Number },
+  props: { regexNode: Object, index: Number, first: Boolean, last: Boolean },
   data: () => ({}),
-  created() {
-    this.first = this.index === 0;
-    this.last = this.index === this.$store.state.wagons.length - 1;
-  },
   methods: {
-    updatePattern() {},
-    updateReplace() {}
+    updateFlag(value) {
+      this.$store.dispatch("toggleFlag", { value, index: this.index });
+    },
+    updatePattern(value) {
+      this.$store.dispatch("updatePattern", { value, index: this.index });
+    },
+    updateReplace(value) {
+      this.$store.dispatch("updateReplace", { value, index: this.index });
+    }
   }
 };
 </script>
