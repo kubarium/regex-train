@@ -1,11 +1,12 @@
 <template>
-  <v-container class="fill-height justify-center" fluid>
+  <v-container class="fill-height justify-center">
     <v-row class="fill-height">
       <v-col class="d-flex flex-column">
         <h2>
           Start here
         </h2>
-        <v-textarea filled :value="$store.state.locomotive" @input="updateLocomotive" />
+        <v-textarea outlined :value="$store.state.locomotive" @input="updateLocomotive" />
+        <v-btn small @click="updateLocomotive('')"><v-icon left>fas fa-trash</v-icon> Clear</v-btn>
       </v-col>
     </v-row>
   </v-container>
