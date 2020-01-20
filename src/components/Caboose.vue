@@ -5,7 +5,7 @@
         <h2>
           You've arrived!
         </h2>
-        <v-textarea filled :value="$store.state.caboose" />
+        <v-textarea outlined :value="$store.state.caboose" />
         <v-btn small @click="copyToClipboard"><v-icon left>far fa-copy</v-icon> Copy</v-btn>
       </v-col>
     </v-row>
