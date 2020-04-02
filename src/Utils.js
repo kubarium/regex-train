@@ -5,7 +5,9 @@ export const prepareOutput = (input, regexNodes) => {
 
   nodes.forEach(node => {
     try {
-      output = output.replace(RegExp(decodeURI(node.pattern), flattenFlags(node.flags)), node.replace);
+      var searchValue = RegExp(decodeURI(node.pattern), flattenFlags(node.flags));
+      var replaceValue = decodeURI(node.replace).replace(/\\t/g, "\t").replace(/\\n/g, "\n").replace(/\\r/g, "\r");
+      output = output.replace(searchValue, replaceValue);
     } catch (error) {
       //simply ignore because we don't want to catch Regex related Syntax errors
     }

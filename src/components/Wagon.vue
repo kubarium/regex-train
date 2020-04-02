@@ -82,7 +82,7 @@
               hide-details
               placeholder="place the text you want to use as replacement: $1, some other text or leave it empty"
               :disabled="!regexNode.active"
-              :value="regexNode.replace"
+              :value="decodeURI(regexNode.replace)"
               @input="updateReplace"
             />
           </v-row>
@@ -93,27 +93,27 @@
 </template>
 
 <script>
-export default {
-  name: "wagon",
-  props: { regexNode: Object, index: Number, first: Boolean, last: Boolean },
-  data: () => ({}),
-  methods: {
-    updateFlag(value) {
-      this.$store.dispatch("toggleFlag", { value, index: this.index });
-    },
-    updatePattern(value) {
-      this.$store.dispatch("updatePattern", { value, index: this.index });
-    },
-    updateReplace(value) {
-      this.$store.dispatch("updateReplace", { value, index: this.index });
+  export default {
+    name: "wagon",
+    props: { regexNode: Object, index: Number, first: Boolean, last: Boolean },
+    data: () => ({}),
+    methods: {
+      updateFlag(value) {
+        this.$store.dispatch("toggleFlag", { value, index: this.index });
+      },
+      updatePattern(value) {
+        this.$store.dispatch("updatePattern", { value, index: this.index });
+      },
+      updateReplace(value) {
+        this.$store.dispatch("updateReplace", { value, index: this.index });
+      }
     }
-  }
-};
+  };
 </script>
 
 <style>
-.node {
-  border-radius: 3px;
-  border: 1px solid #e6e6e6;
-}
+  .node {
+    border-radius: 3px;
+    border: 1px solid #e6e6e6;
+  }
 </style>

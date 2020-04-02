@@ -62,7 +62,7 @@ export default new Vuex.Store({
       commit("updateCaboose");
     },
     updateReplace({ state, commit }, payload) {
-      state.wagons[payload.index].replace = payload.value || "";
+      state.wagons[payload.index].replace = encodeURI(payload.value || "");
       commit("updateCaboose");
     },
     updatePattern({ state, commit }, payload) {
