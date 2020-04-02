@@ -19,17 +19,19 @@
 </template>
 
 <script>
-import Train from "./components/Train";
-import Instructions from "./components/Instructions";
+  import Train from "./components/Train";
+  import Instructions from "./components/Instructions";
 
-export default {
-  name: "App",
+  export default {
+    name: "App",
 
-  components: {
-    Train,
-    Instructions
-  },
+    components: {
+      Train,
+      Instructions
+    },
 
-  data: () => ({})
-};
+    mounted() {
+      this.$store.commit("fetchWagons");
+    }
+  };
 </script>

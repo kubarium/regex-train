@@ -33,12 +33,20 @@ export default new Vuex.Store({
   mutations: {
     updateCaboose(state) {
       state.caboose = prepareOutput(state.locomotive, state.wagons);
+    },
+    storeWagons(state) {
+      localStorage["regex-train-wagons"] = JSON.stringify(state.wagons)
+    }, fetchWagons(state) {
+      if (localStorage["regex-train-wagons"]) {
+        state.wagons = JSON.parse(localStorage["regex-train-wagons"])
+      }
     }
   },
   actions: {
     toggleFlag({ state, commit }, payload) {
       state.wagons[payload.index].flags[payload.flag] = payload.flag;
       commit("updateCaboose");
+      commit("storeWagons");
     },
     updateLocomotive({ state, commit }, value) {
       state.locomotive = value;
@@ -47,6 +55,7 @@ export default new Vuex.Store({
     toggleWagon({ state, commit }, index) {
       state.wagons[index].active = !state.wagons[index].active;
       commit("updateCaboose");
+      commit("storeWagons");
     },
     addWagon({ state, commit }, index) {
       state.wagons.splice(index, 0, {
@@ -56,18 +65,22 @@ export default new Vuex.Store({
         active: true
       });
       commit("updateCaboose");
+      commit("storeWagons");
     },
     removeWagon({ state, commit }, index) {
       state.wagons.splice(index, 1);
       commit("updateCaboose");
+      commit("storeWagons");
     },
     updateReplace({ state, commit }, payload) {
       state.wagons[payload.index].replace = encodeURI(payload.value || "");
       commit("updateCaboose");
+      commit("storeWagons");
     },
     updatePattern({ state, commit }, payload) {
       state.wagons[payload.index].pattern = encodeURI(payload.value || "");
       commit("updateCaboose");
+      commit("storeWagons");
     },
     moveWagon({ state, commit }, payload) {
       if (payload.direction === "up") {
@@ -79,6 +92,8 @@ export default new Vuex.Store({
         state.wagons.splice(payload.index, 2, state.wagons[payload.index + 1], state.wagons[payload.index]);
       }
       commit("updateCaboose");
+      commit("storeWagons");
+
     }
   },
   modules: {}
