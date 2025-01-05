@@ -1,9 +1,17 @@
 <script setup>
   import { Panel, useVueFlow, VueFlow } from "@vue-flow/core";
-  import { Button, Card } from "primevue";
+  import { Background } from "@vue-flow/background";
+  import { MiniMap } from "@vue-flow/minimap";
+
+  import "@vue-flow/minimap/dist/style.css";
+
   import { ref } from "vue";
   import SpecialNode from "./SpecialNode.vue";
   import SpecialEdge from "./SpecialEdge.vue";
+
+  import { useStore } from "../store";
+
+  const store = useStore();
 
   const nodes = ref([
     // an input node, specified by using `type: 'input'`
@@ -50,7 +58,9 @@
       animated: true,
     },
   ]);
-  const { addNodes } = useVueFlow();
+  const { onInit, findNode, snapToGrid, fitView } = useVueFlow();
+
+  snapToGrid.value = true;
 
   function generateRandomNode() {
     nodes.value.push({
@@ -64,20 +74,25 @@
     // add a single node to the graph
     addNodes(generateRandomNode());
   }
+  onInit((instance) => {
+    // `instance` is the same type as the return of `useVueFlow` (VueFlowStore)
+
+    fitView();
+  });
 </script>
 <template>
   <div class="w-screen h-screen">
-    <VueFlow :nodes="nodes" :edges="edges">
+    <VueFlow :nodes="store.nodes" :edges="store.edges">
+      <Background />
+      <MiniMap pannable zoomable />
       <!-- <template #node-special="specialNodeProps">
         <SpecialNode v-bind="specialNodeProps" />
       </template>
 
+
       <template #edge-special="specialEdgeProps">
         <SpecialEdge v-bind="specialEdgeProps" />
       </template> -->
-      <Panel>
-        <button type="button" @click="onAddNode">Add a node</button>
-      </Panel>
     </VueFlow>
   </div>
 </template>
