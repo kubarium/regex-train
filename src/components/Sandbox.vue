@@ -6,7 +6,7 @@
   import "@vue-flow/minimap/dist/style.css";
 
   import { ref } from "vue";
-  import SpecialNode from "./SpecialNode.vue";
+  import WagonNode from "./WagonNode.vue";
   import SpecialEdge from "./SpecialEdge.vue";
 
   import { useStore } from "../store";
@@ -62,37 +62,27 @@
 
   snapToGrid.value = true;
 
-  function generateRandomNode() {
-    nodes.value.push({
-      id: Date.now().toString(),
-      position: { x: Math.random() * 500, y: Math.random() * 500 },
-      label: "Random Node",
-    });
-  }
-
-  function onAddNode() {
-    // add a single node to the graph
-    addNodes(generateRandomNode());
-  }
   onInit((instance) => {
     // `instance` is the same type as the return of `useVueFlow` (VueFlowStore)
-
-    fitView();
+    // fitView();
   });
 </script>
 <template>
-  <div class="w-screen h-screen">
-    <VueFlow :nodes="store.nodes" :edges="store.edges">
-      <Background />
-      <MiniMap pannable zoomable />
-      <!-- <template #node-special="specialNodeProps">
-        <SpecialNode v-bind="specialNodeProps" />
+  <!-- flex w-full h-full -->
+  <div class="">
+    asd
+    <VueFlow :nodes="store.nodes" :edges="store.edges" fit-view-on-init>
+      <template #node-wagon="props">
+        <WagonNode :id="props.id" :data="props.data" />
       </template>
+      <!--
 
 
       <template #edge-special="specialEdgeProps">
         <SpecialEdge v-bind="specialEdgeProps" />
       </template> -->
+      <Background />
+      <MiniMap pannable zoomable />
     </VueFlow>
   </div>
 </template>

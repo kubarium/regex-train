@@ -28,31 +28,27 @@ export const useStore = defineStore("", {
     }),
     getters: {
         nodes: (state) => {
-            let nodes_to_be = [
-                {
-                    id: "-1",
-                    type: "input",
-                    position: { x: 0, y: 0 },
-                    //Departure
-                    data: { label: state.locomotive },
-                }]
-            nodes_to_be = nodes_to_be.concat(nodes_to_be[0],
+            let nodes_to_be = []
+            nodes_to_be = nodes_to_be.concat({
+                id: "-1",
+                type: "input",
+                position: { x: 0, y: 0 },
+                //Departure
+                data: { label: state.locomotive },
+            },
                 [...state.wagons.map((wagon, index) => ({
                     id: index,
+                    type: "wagon",
                     position: { x: -100 + 100 * index, y: 200 },
-                    data: { label: decodeURI(wagon.pattern) },
-                }))]
+                    data: { label: decodeURI(wagon.pattern), flags: wagon.flags },
+                }))], {
+                id: "3",
+                type: "output",
+                position: { x: 0, y: 400 },
+                data: { label: state.caboose },
+            }
             )
 
-            nodes_to_be.push(
-                {
-                    id: "3",
-                    type: "output",
-                    position: { x: 0, y: 400 },
-                    data: { label: state.caboose },
-                }
-
-            )
             console.log(nodes_to_be)
             return nodes_to_be
         },

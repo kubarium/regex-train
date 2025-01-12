@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <Toolbar class="flex m-4">
+  <Toolbar>
     <template #start>
       <h1 class="text-xl font-bold">Regex Train</h1>
     </template>
