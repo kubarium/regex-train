@@ -33,7 +33,7 @@ export const useStore = defineStore("", {
                 id: "-1",
                 type: "input",
                 position: { x: 0, y: 0 },
-                //Departure
+                dimensions: { width: 600, height: 500 },
                 data: { label: state.locomotive },
             },
                 [...state.wagons.map((wagon, index) => ({

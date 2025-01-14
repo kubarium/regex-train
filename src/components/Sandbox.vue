@@ -6,7 +6,7 @@
   import "@vue-flow/minimap/dist/style.css";
 
   import { ref } from "vue";
-  import WagonNode from "./WagonNode.vue";
+  import Wagon from "./Wagon.vue";
   import SpecialEdge from "./SpecialEdge.vue";
 
   import { useStore } from "../store";
@@ -70,10 +70,9 @@
 <template>
   <!-- flex w-full h-full -->
   <div class="">
-    asd
     <VueFlow :nodes="store.nodes" :edges="store.edges" fit-view-on-init>
       <template #node-wagon="props">
-        <WagonNode :id="props.id" :data="props.data" />
+        <Wagon :id="props.id" :data="props.data" />
       </template>
       <!--
 

@@ -2,6 +2,9 @@
   import Footer from "./components/Footer.vue";
   import MissionControl from "./components/MissionControl.vue";
   import Sandbox from "./components/Sandbox.vue";
+  import { useStore } from "./store";
+
+  const store = useStore();
 </script>
 
 <template>
@@ -10,7 +13,13 @@
     <MissionControl class="" />
     <!-- <div class="">    </div> -->
     <div class="flex-grow grid grid-cols-12 gap-3 my-3">
-      <div class="bg-gray-900 p-4 col-span-2">Column 1</div>
+      <div class="bg-gray-900 p-4 col-span-2">
+        Column 1
+        <h1>{{ store.nodes[1].data.flags }}</h1>
+        <div v-for="(value, key) in store.nodes[1].data.flags">
+          <h2>{{ key }}:{{ value }}</h2>
+        </div>
+      </div>
       <div class="bg-gray-100 p-4 col-span-10">
         <Sandbox class="w-full h-full" />
       </div>
